@@ -1,10 +1,8 @@
 <div>
     <div class="relative z-30">
+        {{-- Feature discovery popover for the vote bar --}}
         @if (!$voteType)
-            <div class="mb-3 text-font tracking-wide flex gap-2 items-center justify-center">
-                <x-icons.information-circle class="w-6 h-6" />
-                Click the bar to cast your vote!
-            </div>
+            <x-rfc.vote-bar-discovery />
         @endif
 
         <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-vote-bar-background max-w-[1100px] mx-auto">
