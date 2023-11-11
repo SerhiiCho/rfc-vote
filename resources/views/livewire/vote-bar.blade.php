@@ -1,42 +1,44 @@
 <div>
-    @if (!$voteType)
-        <div class="mb-3 text-font tracking-wide flex gap-2 items-center justify-center">
-            <x-icons.information-circle class="w-6 h-6" />
-            Click the bar to cast your vote!
-        </div>
-    @endif
+    <div class="relative z-30">
+        @if (!$voteType)
+            <div class="mb-3 text-font tracking-wide flex gap-2 items-center justify-center">
+                <x-icons.information-circle class="w-6 h-6" />
+                Click the bar to cast your vote!
+            </div>
+        @endif
 
-    <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-vote-bar-background max-w-[1100px] mx-auto">
-        {{-- Left (green) bar --}}
-        <div
-            @class([
-                'py-1.5 lg:py-3 px-6 flex-grow text-left md:min-w-[15%] min-w-[20%] rounded-l-full bg-gradient-to-r from-agree to-agree-light text-white hover:opacity-100',
-                'cursor-not-allowed opacity-100' => $hasVoted,
-                'hover:bg-green-600 cursor-pointer opacity-80 shadow-md hover:shadow-[0px_0px_7px_var(--color-agree-light)]' => ! $hasVoted,
-            ])
-            style="width: {{ $rfc->percentage_yes }}%;"
+        <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-vote-bar-background max-w-[1100px] mx-auto">
+            {{-- Left (green) bar --}}
+            <div
+                @class([
+                    'py-1.5 lg:py-3 px-6 flex-grow text-left md:min-w-[15%] min-w-[20%] rounded-l-full bg-gradient-to-r from-agree to-agree-light text-white hover:opacity-100',
+                    'cursor-not-allowed opacity-100' => $hasVoted,
+                    'hover:bg-green-600 cursor-pointer opacity-80 shadow-md hover:shadow-[0px_0px_7px_var(--color-agree-light)]' => ! $hasVoted,
+                ])
+                style="width: {{ $rfc->percentage_yes }}%;"
 
-            @if(! $hasVoted)
-                wire:click="vote('{{ App\Models\VoteType::YES }}')"
-            @endif
-        >
-            {{ $rfc->percentage_yes }}%
-        </div>
+                @if(! $hasVoted)
+                    wire:click="vote('{{ App\Models\VoteType::YES }}')"
+                @endif
+            >
+                {{ $rfc->percentage_yes }}%
+            </div>
 
-        {{-- Right (red) bar --}}
-        <div
-            @class([
-                'py-1.5 lg:py-3  px-6 flex-grow text-right md:min-w-[15%] min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100',
-                'cursor-not-allowed opacity-100' => $hasVoted,
-                'hover:bg-red-600 cursor-pointer opacity-80 shadow-md hover:shadow-[0px_0px_7px_var(--color-disagree-light)]' => ! $hasVoted,
-            ])
-            style="width: {{ $rfc->percentage_no }}%;"
+            {{-- Right (red) bar --}}
+            <div
+                @class([
+                    'py-1.5 lg:py-3  px-6 flex-grow text-right md:min-w-[15%] min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100',
+                    'cursor-not-allowed opacity-100' => $hasVoted,
+                    'hover:bg-red-600 cursor-pointer opacity-80 shadow-md hover:shadow-[0px_0px_7px_var(--color-disagree-light)]' => ! $hasVoted,
+                ])
+                style="width: {{ $rfc->percentage_no }}%;"
 
-            @if(! $hasVoted)
-                wire:click="vote('{{ App\Models\VoteType::NO }}')"
-            @endif
-        >
-            {{ $rfc->percentage_no }}%
+                @if(! $hasVoted)
+                    wire:click="vote('{{ App\Models\VoteType::NO }}')"
+                @endif
+            >
+                {{ $rfc->percentage_no }}%
+            </div>
         </div>
     </div>
 
